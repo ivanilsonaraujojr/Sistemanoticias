@@ -6,6 +6,8 @@
 <title>Noticias</title>
 <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
 	rel="stylesheet" />
+<link th:href="@{/webjars/font-awesome/css/all.css}"
+	rel="stylesheet"/>
 <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
@@ -22,10 +24,31 @@
 
 	<main>
 	<div class="container-fluid">
-		<h1 class="row justify-content-center mt-2">Todas publicações:</h1>
+		<h1 class="row justify-content-center mt-2">Lista de publicações:</h1>
+		<span th:if="${noticia.size() == 0}" class="row justify-content-center alert alert-danger">Nenhuma
+			notícia encontrada.</span>
 	</div>
+	<table class="container table">
+		<thead>
+			<tr>
+				<th>Código</th>
+				<th>Titulo</th>
+				<th>Data postagem</th>
+				<th>Autor</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="noticia : ${noticia}">
+			<td th:text="${noticia.codigo}"></td>
+				<td th:text="${noticia.tituloNoticia}"></td>
+				<td th:text="${#dates.format(noticia.dataPostagem, 'dd/MM/yyyy HH:mm')}"></td>
+				<td th:text="${noticia.autor.nome}"></td>
+				
+			</tr>
+		</tbody>
+	</table>
 
-	<div class="container d-flex flex-wrap ultimasPostagens">
+	<!-- <div class="container d-flex flex-wrap ultimasPostagens">
 		<span th:if="${noticia.size() == 0}" class="text-danger">Nenhuma
 			notícia encontrada.</span>
 		<div th:each="noticia: ${noticia}" style="width: 250px;"
@@ -37,9 +60,8 @@
 			<p
 				th:text="${'Data da postagem: '+ #dates.format(noticia.dataPostagem, 'dd/MM/yyyy HH:mm')}"
 				class="dataPostagemCardGerenciamento text-center text-secondary"></p>
- 	
 		</div>
-	</div>
+	</div> -->
 
 	</main>
 

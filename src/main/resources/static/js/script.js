@@ -66,4 +66,4 @@ autorCpf.addEventListener("keyup", function(){
 
 autorNome.addEventListener("keyup", function(){
 	   if(autorNome.value) autorNome.value = autorNome.value.replace(/[0-9]/g,'');
-	});
+});
