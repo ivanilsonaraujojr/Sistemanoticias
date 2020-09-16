@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: sistemablog
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: ivanilsonjunior
+Implementation-Vendor-Id: br.com.ivanilsonjr
+Build-Jdk: 1.8.0_265
+Implementation-URL: https://spring.io/projects/spring-boot/sistemablog
+Created-By: Maven Integration for Eclipse
+

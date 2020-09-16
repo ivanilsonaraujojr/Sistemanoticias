@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Noticias</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+	<header>
+		<nav class="navbar bg-dark navbar-dark">
+			<a class="navbar-brand" href="/"> <span class="h3">Sistema Notícias</span>
+			</a>
+
+			<form class="form-inline">
+			<a class="btn btn-danger nav-link p-1 m-1 text-white"
+					href="/cadastrarnoticia">Cadastrar notícia</a>
+					
+					<a class="btn btn-success nav-link p-1 text-white"
+					href="/">Voltar para o inicio</a>
+			</form>
+		</nav>
+	</header>
+
+	<main>
+	<div class="container-fluid">
+		<h1 class="row justify-content-center mt-2">Ultimas notícias</h1>
+	</div>
+
+	<div class="container ultimasPostagens">
+		<div th:each="noticia: ${noticia}" class="postagemBloco card" style="width: 350px">
+			<div class="card-body">
+				<h4 th:text="${noticia.tituloNoticia}" class="card-title">Titulo</h4>
+				<a th:href="@{/noticia/{noticiaId}(noticiaId=${1})}" class="btn btn-primary">Abrir noticia</a>
+			</div>
+		</div>
+	</div>
+
+	</main>
+</body>
+</html>

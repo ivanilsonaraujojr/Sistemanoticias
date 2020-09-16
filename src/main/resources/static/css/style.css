@@ -1,0 +1,81 @@
+/*Fontes*/
+@import url('https://fonts.googleapis.com/css2?family=Kufam:wght@600&display=swap');
+
+/*Formatações*/
+.ultimasPostagens{
+	border: 1px solid #e0ebeb;
+}
+
+.postagemBloco{
+	border:1px solid rgb(211, 215, 207);
+	box-shadow: -14px 6px 25px -10px rgba(0,0,0,0.75);
+	margin:15px 0 15px 50px;
+	padding: 10px;
+}
+
+.dataPostagem{
+	font-size: 0.9rem;
+	padding-top: 10px;
+}
+
+.botaoVerNoticia{
+	margin: 0 auto;
+	width: 150px;
+}
+
+.nomeAutor{
+	font-size: 0.85rem;
+}
+
+.imagemNoticia{
+	border:0.5px solid black;
+	width:100%;
+	max-width: 450px;
+	min-height:250px;
+	max-height:250px;
+	margin: 0 auto;
+}
+
+.cadastroImagem{
+	width:100%;
+	max-width: 450px;
+	min-height:250px;
+	max-height:250px;
+	padding-top:5px;
+	margin: 0 auto;
+}
+
+.alert{
+	padding: 5px;
+}
+
+.invalido{
+	border: 1px solid red;
+}
+
+.centro{
+	margin: 0 auto;
+}
+
+.valido{
+	border: 1px solid green;
+}
+.botaoGerenciamento{
+	font-size:40px;
+	font-family: 'Kufam', cursive;
+	padding: 100px;
+	margin:25px;
+}
+
+.tituloCardGerenciamento{
+	font-size: 1rem;
+}
+
+.imagemCardGerenciamento{
+	width: 150px;
+	height: 100px;
+}
+ 
+.dataPostagemCardGerenciamento{
+	font-size: 0.7rem;	
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Noticias</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+	<header>
+		<nav class="navbar bg-dark navbar-dark">
+			<a class="navbar-brand" href="/"> <span class="h3">Sistema Notícias</span>
+			</a>
+
+			<form class="form-inline">
+			<a class="btn btn-danger nav-link p-1 m-1 text-white"
+					href="/cadastrarnoticia">Cadastrar notícia</a>
+					
+					<a class="btn btn-warning nav-link p-1 m-1 text-white"
+					href="/cadastrarautor">Cadastrar autor</a>
+					
+					<a class="btn btn-info nav-link p-1 m-1 text-white"
+					href="/gerenciamento">Gerenciamento</a>
+			</form>
+		</nav>
+	</header>
+
+	<main>
+	<div class="container-fluid">
+		<h1 class="row justify-content-center mt-2">Ultimas publicações</h1>
+	</div>
+
+	<div class="container d-flex flex-wrap ultimasPostagens">
+		<span th:if="${noticia.size() == 0}" class="text-danger">Nenhuma
+			notícia encontrada.</span>
+		<div th:each="noticia: ${noticia}" style="width: 300px"
+			class="postagemBloco flex-shrink-1 card">
+			<h4 th:text="${noticia.tituloNoticia}" class="card-title text-center"></h4>
+			<img class="img-fluid imagemNoticia" th:src="${noticia.linkImagem}" />
+			<h4 th:text="${'Escrito por: ' + noticia.autor.nome}"
+				class="nomeAutor text-info text-center"></h4>
+			<p
+				th:text="${'Data da postagem: '+ #dates.format(noticia.dataPostagem, 'dd/MM/yyyy HH:mm')}"
+				class="dataPostagem text-center text-secondary"></p>
+			<a th:href="@{/noticia/{noticiaId}(noticiaId=${noticia.codigo})}"
+				class="botaoVerNoticia btn btn-primary">Abrir noticia</a>
+		</div>
+	</div>
+
+	</main>
+
+</body>
+</html>

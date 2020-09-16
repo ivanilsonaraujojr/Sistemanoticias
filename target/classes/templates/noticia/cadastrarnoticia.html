@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Noticias</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+	<header>
+		<nav class="navbar bg-dark navbar-dark">
+			<a class="navbar-brand" href="/"> <span class="h3">Sistema Notícias</span>
+			</a>
+
+			<form class="form-inline">
+				<a class="btn btn-success nav-link p-1 text-white" href="/">Voltar
+					para o inicio</a>
+			</form>
+		</nav>
+	</header>
+
+	<main>
+	<div class="container-fluid">
+		<h1 class="row justify-content-center mt-2">Cadastrar notícia</h1>
+	</div>
+	
+	<th:block th:include="mensagemValidacao"></th:block>
+
+	<div class="container">
+	<form action="" th:object="${noticia}" autocomplete="off" method=POST>
+		<div class="form-group">
+		<div class="row">
+		<div class="col-9">
+		<label for="tituloNoticia">Titulo da notícia: </label>		
+		<span class="alert alert-danger" th:if="${#fields.hasErrors('tituloNoticia')}" th:errors="*{tituloNoticia}"></span> 
+		<input type="text" th:field="*{tituloNoticia}" onchange="validarCampo(this)" name="tituloNoticia"class="form-control" required>
+		</div>
+		
+		<div class="col">
+		<label>Data e horario da publicação</label> <input disabled type="text" placeholder="Data e hora do sistema" class="form-control inputData">
+		</div>
+		</div>
+		</div>
+		
+		<div class="form-group">
+			<label>Digite o link da imagem:</label>
+			<span class="alert alert-danger" th:if="${#fields.hasErrors('linkImagem')}" th:errors="*{linkImagem}"></span>
+			<input name="linkImagem" th:field="*{linkImagem}" autocomplete="off" onchange="validarImagem(linkImagem.value)" class="form-control" placeholder="https://link.png" required/>
+			<img src="" style="display:none" class="cadastroImagem preview" />
+		</div>
+		<div class="form-group">
+			<label for="autor">Selecione o autor</label> 
+			<span class="alert alert-danger" th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}"></span>
+			<select name="autor" onchange="validarCampo(this)" th:field="*{autor}" class="form-control" required>
+			<option value=""> Selecione um autor </option>
+			<option th:each="autores : ${autores}" th:value="${autores.id}" th:text="${autores.nome}"></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlTextarea1">Corpo da notícia</label>
+			<span class="alert alert-danger" th:if="${#fields.hasErrors('corpoNoticia')}" th:errors="*{corpoNoticia}"></span>
+			<textarea class="form-control" th:field="*{corpoNoticia}" onchange="validarCampo(this)" name="corpoNoticia" rows="3" required></textarea>
+		</div>
+		
+		  <button type="submit" name="btEnviar" class="btn btn-primary">Enviar</button>
+	</form>
+	</div>
+
+	</main>
+	
+	<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+	<script src="/js/script.js"></script>
+</body>
+</html>

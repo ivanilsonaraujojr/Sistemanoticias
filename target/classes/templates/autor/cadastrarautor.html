@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Noticias</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+	<header>
+		<nav class="navbar bg-dark navbar-dark">
+			<a class="navbar-brand" href="/"> <span class="h3">Sistema Notícias</span>
+			</a>
+
+			<form class="form-inline">
+				<a class="btn btn-success nav-link p-1 text-white" href="/">Voltar
+					para o inicio</a>
+			</form>
+		</nav>
+	</header>
+
+	<main>
+	<div class="container-fluid">
+		<h1 class="row justify-content-center mt-2">Cadastrar autor</h1>
+	</div>
+	
+	<th:block th:include="mensagemValidacao"></th:block>
+
+	<div class="container" style="width: 50%">
+	<form action="" th:object="${autor}" autocomplete="off" method=POST>
+		<div class="form-group">
+		<div class="row centro">
+		<div class="col-6">
+		<label for="tituloNoticia">Nome do autor: </label>		
+		<span class="alert alert-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span> 
+		<input type="text" onchange="validarCampo(this)" th:field="*{nome}" name="nome" placeholder="Ex: Maria Joaquina" class="form-control"  required>
+		</div>
+		<div class="col-6">
+		<label for="cpf">CPF: </label>		
+		<span class="alert alert-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span> 
+		<input type="text" onchange="validarCampo(this)" th:field="*{cpf}" maxlength="11" name="cpf" class="form-control cpf-mask" placeholder="Ex: 12345678910" required>
+		</div>
+		</div>
+		</div>
+		
+		<div class="row">
+		 <button type="submit" name="btEnviar" class="centro btn btn-primary">Cadastrar</button>
+		</div>
+		
+		 
+	</form>
+	</div>
+
+	</main>
+	
+	<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+	<script src="/js/script.js"></script>
+</body>
+</html>
