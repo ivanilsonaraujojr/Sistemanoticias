@@ -7,6 +7,8 @@
 <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
 	rel="stylesheet" />
 <link rel="stylesheet" href="/css/style.css" />
+<link th:href="@{/webjars/font-awesome/css/all.css}"
+	rel="stylesheet"/>
 </head>
 <body>
 	<header>
@@ -15,27 +17,19 @@
 			</a>
 
 			<form class="form-inline">
-			<a class="btn btn-danger nav-link p-1 m-1 text-white"
-					href="/cadastrarnoticia">Cadastrar notícia</a>
-					
-					<a class="btn btn-success nav-link p-1 text-white"
-					href="/">Voltar para o inicio</a>
+			<a class="btn btn-success nav-link p-1 text-white"
+			href="/">Voltar para o inicio</a>
 			</form>
 		</nav>
 	</header>
 
 	<main>
-	<div class="container-fluid">
-		<h1 class="row justify-content-center mt-2">Ultimas notícias</h1>
-	</div>
-
-	<div class="container ultimasPostagens">
-		<div th:each="noticia: ${noticia}" class="postagemBloco card" style="width: 350px">
-			<div class="card-body">
-				<h4 th:text="${noticia.tituloNoticia}" class="card-title">Titulo</h4>
-				<a th:href="@{/noticia/{noticiaId}(noticiaId=${1})}" class="btn btn-primary">Abrir noticia</a>
-			</div>
-		</div>
+	<div class="blocoNoticia p-5 container-fluid">
+		<h1 class="justify-content-center mt-2 p-3" th:text="${noticia.tituloNoticia}"></h1>
+		<p><i class="fas fa-user" th:text="' '+${noticia.autor.nome}"></i></p>
+		<p><i class="fas fa-calendar-alt" th:text="' ' +${#dates.format(noticia.dataPostagem, 'dd/MM/yyyy HH:mm')}"></i></p>
+		<img class="m-2 img-fluid" th:src="${noticia.linkImagem}" />
+		<p th:utext="${noticia.corpoNoticia}"></p>
 	</div>
 
 	</main>

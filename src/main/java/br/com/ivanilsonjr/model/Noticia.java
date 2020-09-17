@@ -95,4 +95,47 @@ public class Noticia implements Comparable<Noticia>{
 		}
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
+		result = prime * result + ((corpoNoticia == null) ? 0 : corpoNoticia.hashCode());
+		result = prime * result + ((linkImagem == null) ? 0 : linkImagem.hashCode());
+		result = prime * result + ((tituloNoticia == null) ? 0 : tituloNoticia.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Noticia other = (Noticia) obj;
+		if (autor == null) {
+			if (other.autor != null)
+				return false;
+		} else if (!autor.equals(other.autor))
+			return false;
+		if (corpoNoticia == null) {
+			if (other.corpoNoticia != null)
+				return false;
+		} else if (!corpoNoticia.equals(other.corpoNoticia))
+			return false;
+		if (linkImagem == null) {
+			if (other.linkImagem != null)
+				return false;
+		} else if (!linkImagem.equals(other.linkImagem))
+			return false;
+		if (tituloNoticia == null) {
+			if (other.tituloNoticia != null)
+				return false;
+		} else if (!tituloNoticia.equals(other.tituloNoticia))
+			return false;
+		return true;
+	}
+
 }

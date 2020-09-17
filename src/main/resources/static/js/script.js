@@ -38,11 +38,13 @@ function validarImagem(src) {
 			viewImagem.src = src;
 			viewImagem.style.display = "block";
 			entradaImagem.style.border = "1px solid green"
+			botaoEnviar.disabled=false;
 				return true;
 		}
 	}
 	entradaImagem.style.border = "1px solid red"
 	viewImagem.style.display = "none";
+	botaoEnviar.disabled=true;
 };
 
 
@@ -67,3 +69,10 @@ autorCpf.addEventListener("keyup", function(){
 autorNome.addEventListener("keyup", function(){
 	   if(autorNome.value) autorNome.value = autorNome.value.replace(/[0-9]/g,'');
 });
+
+function showFunctionModal(id) {
+    $(document).ready(function () {
+        $('.modal3').modal();
+        $("#ids").val(id);
+    })
+};

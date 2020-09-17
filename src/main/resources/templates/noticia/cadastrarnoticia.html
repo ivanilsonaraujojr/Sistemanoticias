@@ -7,6 +7,7 @@
 <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
 	rel="stylesheet" />
 <link rel="stylesheet" href="/css/style.css" />
+<script src="https://cdn.tiny.cloud/1/g4fnq0iqs2cr764yywfyu85h5dcsimj3rt8ptb2rd56z6656/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body onload="atualizarHora()">
 	<header>
@@ -61,7 +62,7 @@
 		<div class="form-group">
 			<label for="exampleFormControlTextarea1">Corpo da notícia</label>
 			<span class="alert alert-danger" th:if="${#fields.hasErrors('corpoNoticia')}" th:errors="*{corpoNoticia}"></span>
-			<textarea class="form-control" th:field="*{corpoNoticia}" onchange="validarCampo(this)" name="corpoNoticia" rows="3" required></textarea>
+			<textarea th:field="*{corpoNoticia}" onchange="validarCampo(this)" name="corpoNoticia"></textarea>
 		</div>
 		
 		  <button type="submit" name="btEnviar" class="btn btn-primary">Enviar</button>
@@ -72,5 +73,14 @@
 	
 	<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 	<script src="/js/script.js"></script>
+	<script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+      toolbar_mode: 'floating',
+      tinycomments_author: 'Author name',
+    });
+  </script>
 </body>
 </html>

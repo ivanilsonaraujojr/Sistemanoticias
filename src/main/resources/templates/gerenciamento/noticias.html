@@ -25,6 +25,7 @@
 	<main>
 	<div class="container-fluid">
 		<h1 class="row justify-content-center mt-2">Lista de publicações:</h1>
+		<th:block th:include="mensagemValidacao"></th:block>
 		<span th:if="${noticia.size() == 0}" class="row justify-content-center alert alert-danger">Nenhuma
 			notícia encontrada.</span>
 	</div>
@@ -35,35 +36,51 @@
 				<th>Titulo</th>
 				<th>Data postagem</th>
 				<th>Autor</th>
+				<th>Ações</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="noticia : ${noticia}">
 			<td th:text="${noticia.codigo}"></td>
-				<td th:text="${noticia.tituloNoticia}"></td>
+			
+				<td>
+				<div class="tituloPostagemGerenciamento" th:text="${noticia.tituloNoticia}"></div>
+				</td>
 				<td th:text="${#dates.format(noticia.dataPostagem, 'dd/MM/yyyy HH:mm')}"></td>
 				<td th:text="${noticia.autor.nome}"></td>
-				
+				<td class="tdAcoes"> 
+				<a data-toggle="modal" data-target="#modal-delete"
+                                           th:attr="data-target='#modal-delete'+${noticia.codigo}">
+                                            <span class="glyphicon glyphicon-trash" data-toggle="tooltip"
+                                                  data-placement="top" title="Delete Permanently"></span></a>
+                                                  
+				<button type="button" class="btn" data-toggle="modal" title="Deletar" data-target="#modal-delete" th:attr="data-target='#noticiaDeleteConfirmacao'+${noticia.codigo}"><i class="fas fa-trash"></i></button>
+				<a class="btn" title="Editar" th:href="@{'/gerenciamento/editar/' + ${noticia.codigo}}"><i class="fas fa-edit"></i></a>
+				<a target="_blank" th:href="@{${noticia.linkImagem}}" title="Ver imagem"><i class="fas fa-image"></i></a>
+				<div class="modal fade" th:id="noticiaDeleteConfirmacao+${noticia.codigo}" tabindex="-1" role="dialog" aria-labelledby="noticiaDeleteConfirmacao" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="empDeleteConfirm">Confimação</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body" th:text="'Tem certeza que deseja deletar a notícia: ' + ${noticia.codigo} + '?' ">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a th:href="@{'/gerenciamento/deletar/' + ${noticia.codigo}}"><button class="btn btn-primary">Deletar</button></a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                                </div>
+                </div>
+				</td>
 			</tr>
 		</tbody>
 	</table>
-
-	<!-- <div class="container d-flex flex-wrap ultimasPostagens">
-		<span th:if="${noticia.size() == 0}" class="text-danger">Nenhuma
-			notícia encontrada.</span>
-		<div th:each="noticia: ${noticia}" style="width: 250px;"
-			class="postagemBloco flex-shrink-1 card">
-			<h4 th:text="${noticia.tituloNoticia}" class="tituloCardGerenciamento text-center"></h4>
-			<img class="img-fluid imagemCardGerenciamento centro" th:src="${noticia.linkImagem}" />
-			<h4 th:text="${'Escrito por: ' + noticia.autor.nome}"
-				class="nomeAutor text-info text-center"></h4>
-			<p
-				th:text="${'Data da postagem: '+ #dates.format(noticia.dataPostagem, 'dd/MM/yyyy HH:mm')}"
-				class="dataPostagemCardGerenciamento text-center text-secondary"></p>
-		</div>
-	</div> -->
-
 	</main>
-
+<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
 </body>
 </html>

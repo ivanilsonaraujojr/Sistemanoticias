@@ -30,4 +30,5 @@ public class GerenciamentoController {
 		mv.addObject("noticia", noticia);
 		return mv;
 	}
+
 }

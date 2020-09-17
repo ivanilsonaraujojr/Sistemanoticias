@@ -1,6 +1,6 @@
 /*Fontes*/
 @import url('https://fonts.googleapis.com/css2?family=Kufam:wght@600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@1,700&display=swap');
 /*Formatações*/
 .ultimasPostagens{
 	border: 1px solid #e0ebeb;
@@ -60,6 +60,7 @@
 .valido{
 	border: 1px solid green;
 }
+
 .botaoGerenciamento{
 	font-size:40px;
 	font-family: 'Kufam', cursive;
@@ -76,6 +77,42 @@
 	height: 100px;
 }
  
-.dataPostagemCardGerenciamento{
+.dataPostagemGerenciamento{
 	font-size: 0.7rem;	
+}
+
+.tituloPostagemGerenciamento{
+	white-space: nowrap; 
+    width: 25em; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.tdAcoes{
+	font-size: 1.2rem;
+}
+
+.fas:hover{
+	color:red;
+}
+
+.blocoNoticia{
+	background:rgba(0,0,0,0.1);
+	text-align: center;
+	max-width: 80vw;
+	word-wrap: break-word
+}
+.blocoNoticia h1{
+	color:white;
+	background-color:black;
+	border-radius:50px;
+	font-family: 'Noto Sans', sans-serif;
+}
+.blocoNoticia img{
+	width: 580px;
+}
+
+.blocoNoticia p{
+	font-size:1.5rem;
+	
 }

@@ -35,12 +35,12 @@
 	<div class="container d-flex flex-wrap ultimasPostagens">
 		<span th:if="${noticia.size() == 0}" class="text-danger">Nenhuma
 			notícia encontrada.</span>
-		<div th:each="noticia: ${noticia}" style="width: 300px"
+		<div th:each="noticia: ${noticia}" style="width: 500px"
 			class="postagemBloco flex-shrink-1 card">
 			<h4 th:text="${noticia.tituloNoticia}" class="card-title text-center"></h4>
 			<img class="img-fluid imagemNoticia" th:src="${noticia.linkImagem}" />
 			<h4 th:text="${'Escrito por: ' + noticia.autor.nome}"
-				class="nomeAutor text-info text-center"></h4>
+				class="nomeAutor m-2 text-info text-center"></h4>
 			<p
 				th:text="${'Data da postagem: '+ #dates.format(noticia.dataPostagem, 'dd/MM/yyyy HH:mm')}"
 				class="dataPostagem text-center text-secondary"></p>
