@@ -61,15 +61,6 @@ function validarCampo(campo){
 	}
 }
 
-
-autorCpf.addEventListener("keyup", function(){
-   if(autorCpf.value) autorCpf.value = autorCpf.value.replace(/[^\d]+/g,'');
-});
-
-autorNome.addEventListener("keyup", function(){
-	   if(autorNome.value) autorNome.value = autorNome.value.replace(/[0-9]/g,'');
-});
-
 function showFunctionModal(id) {
     $(document).ready(function () {
         $('.modal3').modal();

@@ -22,6 +22,7 @@ import br.com.ivanilsonjr.model.Autor;
 import br.com.ivanilsonjr.model.Noticia;
 import br.com.ivanilsonjr.repository.AutorRepository;
 import br.com.ivanilsonjr.repository.NoticiaRepository;
+import br.com.ivanilsonjr.util.EncurtarLink;
 
 @Controller
 public class NoticiaController {
@@ -47,19 +48,21 @@ public class NoticiaController {
 	
 	@GetMapping("/cadastrarnoticia")
 	public String cadastrarNoticia(Noticia noticia, Model model){
-		model.addAttribute("autores", ar.findAll());
+		model.addAttribute("autores", ar.findAllByIndVisivelTrue());
 		return "noticia/cadastrarnoticia";
 	}
 	
 	@PostMapping("/cadastrarnoticia")
 	public String form(@Valid Noticia noticia, BindingResult result, RedirectAttributes attributes, Model model) {
-		model.addAttribute("autores", ar.findAll());
+		model.addAttribute("autores", ar.findAllByIndVisivelTrue());
 		if (result.hasErrors()) {
 			return "noticia/cadastrarnoticia";
 		}else if(nr.findAll().contains(noticia)) {
 			attributes.addFlashAttribute("mensagemErro", "Esta notícia ja existe!");
 			return "redirect:/cadastrarnoticia";
 		}else {
+		String linkEncurtado = EncurtarLink.shortURL(noticia.getLinkImagem());
+		noticia.setLinkImagem(linkEncurtado.toString());	
 		noticia.setDataPostagem(new Date());
 		nr.save(noticia);
 		attributes.addFlashAttribute("mensagem", "Notícia adicionada com sucesso!");
@@ -68,7 +71,7 @@ public class NoticiaController {
 		
 	}
 	
-	@RequestMapping(value="/gerenciamento/deletar/{codigo}")
+	@RequestMapping(value="/gerenciamento/deletarnoticia/{codigo}")
 	public String deletarNoticia(@PathVariable Long codigo,RedirectAttributes attributes) {
 		Noticia noticia = nr.findByCodigo(codigo);
 		if(noticia != null) {
@@ -81,13 +84,13 @@ public class NoticiaController {
 		
 	}
 	
-	@GetMapping(value="/gerenciamento/editar/{codigo}")
+	@GetMapping(value="/gerenciamento/editarnoticia/{codigo}")
 	public ModelAndView editarNoticia(@PathVariable Long codigo) {
 		Noticia noticia = nr.findByCodigo(codigo);
 		ModelAndView mv;
 		if(noticia != null) {
 			mv = new ModelAndView("gerenciamento/editarnoticia");
-			List<Autor> listaAutores = ar.findAll();
+			List<Autor> listaAutores = ar.findAllByIndVisivelTrue();
 			if(listaAutores.contains(noticia.getAutor())) {
 				listaAutores.remove(noticia.getAutor());
 			}
@@ -99,23 +102,24 @@ public class NoticiaController {
 		return mv;
 	}
 	
-	@PostMapping("/gerenciamento/editar/{codigo}")
+	@PostMapping("/gerenciamento/editarnoticia/{codigo}")
 	public String formEdicaoNoticia(@Valid Noticia noticia, BindingResult result, RedirectAttributes attributes, Model model) {
-		List<Autor> listaAutores = ar.findAll();
-		if(listaAutores.contains(noticia.getAutor())) {
-			listaAutores.remove(noticia.getAutor());
-		}
+		List<Autor> listaAutores = ar.findAllByIndVisivelTrue();
 		model.addAttribute("autores", listaAutores);
 		if (result.hasErrors()) {
 			return "gerenciamento/editarnoticia";
 		}else if(nr.findAll().contains(noticia)) {
 			attributes.addFlashAttribute("mensagemErro", "Erro: Nenhum dado atualizado!");
-			return "redirect:/gerenciamento/editar/" + noticia.getCodigo();
+			return "redirect:/gerenciamento/editarnoticia/" + noticia.getCodigo();
 		}else {
+		if(!noticia.getLinkImagem().equals(nr.findByCodigo(noticia.getCodigo()).getLinkImagem())) {
+			String linkEncurtado = EncurtarLink.shortURL(noticia.getLinkImagem());
+			noticia.setLinkImagem(linkEncurtado.toString());
+		}
 		noticia.setDataPostagem(new Date());
 		nr.save(noticia);
 		attributes.addFlashAttribute("mensagem", "Notícia atualizada com sucesso!");
-			return "redirect:/gerenciamento/editar/" + noticia.getCodigo();
+			return "redirect:/gerenciamento/editarnoticia/" + noticia.getCodigo();
 		}
 		
 	}

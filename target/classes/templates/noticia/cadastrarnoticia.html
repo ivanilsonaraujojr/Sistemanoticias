@@ -52,7 +52,7 @@
 			<img src="" style="display:none" class="cadastroImagem preview" />
 		</div>
 		<div class="form-group">
-			<label for="autor">Selecione o autor</label> 
+			<label for="autor">Selecione o autor:</label> 
 			<span class="alert alert-danger" th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}"></span>
 			<select name="autor" onchange="validarCampo(this)" th:field="*{autor}" class="form-control" required>
 			<option value=""> Selecione um autor </option>
@@ -60,7 +60,7 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlTextarea1">Corpo da notícia</label>
+			<label>Corpo da notícia:</label>
 			<span class="alert alert-danger" th:if="${#fields.hasErrors('corpoNoticia')}" th:errors="*{corpoNoticia}"></span>
 			<textarea th:field="*{corpoNoticia}" onchange="validarCampo(this)" name="corpoNoticia"></textarea>
 		</div>

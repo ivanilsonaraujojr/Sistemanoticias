@@ -55,7 +55,7 @@
                                                   data-placement="top" title="Delete Permanently"></span></a>
                                                   
 				<button type="button" class="btn" data-toggle="modal" title="Deletar" data-target="#modal-delete" th:attr="data-target='#noticiaDeleteConfirmacao'+${noticia.codigo}"><i class="fas fa-trash"></i></button>
-				<a class="btn" title="Editar" th:href="@{'/gerenciamento/editar/' + ${noticia.codigo}}"><i class="fas fa-edit"></i></a>
+				<a class="btn" title="Editar" th:href="@{'/gerenciamento/editarnoticia/' + ${noticia.codigo}}"><i class="fas fa-edit"></i></a>
 				<a target="_blank" th:href="@{${noticia.linkImagem}}" title="Ver imagem"><i class="fas fa-image"></i></a>
 				<div class="modal fade" th:id="noticiaDeleteConfirmacao+${noticia.codigo}" tabindex="-1" role="dialog" aria-labelledby="noticiaDeleteConfirmacao" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -69,7 +69,7 @@
                                     <div class="modal-body" th:text="'Tem certeza que deseja deletar a notícia: ' + ${noticia.codigo} + '?' ">
                                     </div>
                                     <div class="modal-footer">
-                                        <a th:href="@{'/gerenciamento/deletar/' + ${noticia.codigo}}"><button class="btn btn-primary">Deletar</button></a>
+                                        <a th:href="@{'/gerenciamento/deletarnoticia/' + ${noticia.codigo}}"><button class="btn btn-primary">Deletar</button></a>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                     </div>
                                 </div>

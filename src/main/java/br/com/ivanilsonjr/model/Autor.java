@@ -15,11 +15,11 @@ import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Table(name="autores")
-public class Autor {
+public class Autor implements Comparable<Autor>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Size(min = 8, message="Nome invalido")
@@ -31,11 +31,13 @@ public class Autor {
 	
 	private Date dataCadastro;
 
-	public long getId() {
+	private boolean indVisivel;
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -61,6 +63,23 @@ public class Autor {
 
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+	
+	public boolean isIndVisivel() {
+		return indVisivel;
+	}
+
+	public void setIndVisivel(boolean ind_visivel) {
+		this.indVisivel = ind_visivel;
+	}
+	
+	@Override
+	public int compareTo(Autor o) {
+		if (o.getDataCadastro().getTime() > this.dataCadastro.getTime()) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 
 	@Override

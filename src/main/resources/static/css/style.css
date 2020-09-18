@@ -81,9 +81,9 @@
 	font-size: 0.7rem;	
 }
 
-.tituloPostagemGerenciamento{
+.tituloPostagemGerenciamento,.nomeAutorGerenciamento{
 	white-space: nowrap; 
-    width: 25em; 
+    width: 18em; 
     overflow: hidden;
     text-overflow: ellipsis; 
 }

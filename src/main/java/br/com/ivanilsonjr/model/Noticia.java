@@ -12,6 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -23,13 +24,16 @@ public class Noticia implements Comparable<Noticia>{
 	private Long codigo;
 	
 	@Size(min=8, message="Titulo invalido")
+	@Type(type="text")
 	private String tituloNoticia;
 	
 	@NotEmpty(message="Insira um link de uma imagem")
 	@URL(message="Verifique o link")
+	@Type(type="text")
 	private String linkImagem;
 	
 	@Size(min=50, message="Corpo da notícia invalido")
+	@Type(type="text")
 	private String corpoNoticia;
 	
 	private Date dataPostagem;

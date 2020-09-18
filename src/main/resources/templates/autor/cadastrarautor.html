@@ -54,7 +54,14 @@
 	</div>
 
 	</main>
-	
+	<script type="text/javascript">
+	document.getElementsByName("cpf")[0].addEventListener("keyup", function(){
+		   if(autorCpf.value) autorCpf.value = autorCpf.value.replace(/[^\d]+/g,'');
+		});
+	document.getElementsByName("nome")[0].addEventListener("keyup", function(){
+		   if(autorNome.value) autorNome.value = autorNome.value.replace(/[0-9]/g,'');
+	});
+	</script>
 	<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 	<script src="/js/script.js"></script>
 </body>
