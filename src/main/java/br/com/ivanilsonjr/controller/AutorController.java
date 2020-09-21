@@ -87,7 +87,7 @@ public class AutorController {
 	@PostMapping("/gerenciamento/editarautor/{id}")
 	public String formEdicaoAutor(@Valid Autor autor, BindingResult result, RedirectAttributes attributes ) {
 		if (result.hasErrors()) {
-				return "/gerenciamento/editarautor";
+				return "gerenciamento/editarautor";
 		}
 		if(ar.findByIdAndIndVisivelTrue(autor.getId()).equals(autor)) {
 			attributes.addFlashAttribute("mensagemErro", "Erro: Nenhum dado alterado");

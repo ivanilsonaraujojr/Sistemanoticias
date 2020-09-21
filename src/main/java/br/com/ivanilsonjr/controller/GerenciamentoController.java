@@ -30,7 +30,7 @@ public class GerenciamentoController {
 		List<Noticia> noticia = nr.findAll();
 		Collections.sort(noticia);
 		ModelAndView mv;
-		mv = new ModelAndView("/gerenciamento/noticias");
+		mv = new ModelAndView("gerenciamento/noticias");
 		mv.addObject("noticia", noticia);
 		return mv;
 	}
@@ -40,7 +40,7 @@ public class GerenciamentoController {
 		List<Autor> autores = ar.findAllByIndVisivelTrue();
 		Collections.sort(autores);
 		ModelAndView mv;
-		mv = new ModelAndView("/gerenciamento/autores");
+		mv = new ModelAndView("gerenciamento/autores");
 		mv.addObject("autor", autores);
 		return mv;
 	}
