@@ -87,6 +87,7 @@ public class Autor implements Comparable<Autor>{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 
@@ -104,7 +105,14 @@ public class Autor implements Comparable<Autor>{
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
 		return true;
 	}
+
+
 	
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ivanilsonjr.model.Autor;
@@ -40,7 +41,7 @@ public class AutorController {
 				return "autor/cadastrarautor";
 		}
 		if(ar.findByCpf(autor.getCpf()) != null) {
-			attributes.addFlashAttribute("mensagemErro", "CPF ja cadastrado na base!");
+			attributes.addFlashAttribute("mensagemErro", "Erro: CPF ja cadastrado na base!");
 			return "redirect:/cadastrarautor";
 		}else {
 			autor.setIndVisivel(true);
@@ -69,5 +70,39 @@ public class AutorController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 		
+	}
+	@GetMapping("/gerenciamento/editarautor/{id}")
+	public ModelAndView editarAutor(@PathVariable Long id){
+		Autor autor = ar.findByIdAndIndVisivelTrue(id);
+		ModelAndView mv;
+		if(autor != null) {
+			mv = new ModelAndView("gerenciamento/editarautor");
+			mv.addObject("autor", autor);
+		}else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+		return mv;
+	}
+	
+	@PostMapping("/gerenciamento/editarautor/{id}")
+	public String formEdicaoAutor(@Valid Autor autor, BindingResult result, RedirectAttributes attributes ) {
+		if (result.hasErrors()) {
+				return "/gerenciamento/editarautor";
+		}
+		if(ar.findByIdAndIndVisivelTrue(autor.getId()).equals(autor)) {
+			attributes.addFlashAttribute("mensagemErro", "Erro: Nenhum dado alterado");
+				return "redirect:/gerenciamento/editarautor/" + autor.getId();
+		}else {
+			if((!autor.getCpf().equals(ar.findByIdAndIndVisivelTrue(autor.getId()).getCpf())) && ar.findByCpf(autor.getCpf()) != null) {
+				attributes.addFlashAttribute("mensagemErro", "Erro: CPF ja cadastrado na base!");
+				return "redirect:/gerenciamento/editarautor/" + autor.getId();
+			}else {
+				autor.setIndVisivel(true);
+				autor.setDataCadastro(new Date());
+				ar.save(autor);
+				attributes.addFlashAttribute("mensagem", "Dados do autor atualizados com sucesso!");
+					return "redirect:/gerenciamento/autores";
+			}
+		}
 	}
 }

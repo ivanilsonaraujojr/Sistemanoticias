@@ -58,7 +58,7 @@ public class NoticiaController {
 		if (result.hasErrors()) {
 			return "noticia/cadastrarnoticia";
 		}else if(nr.findAll().contains(noticia)) {
-			attributes.addFlashAttribute("mensagemErro", "Esta notícia ja existe!");
+			attributes.addFlashAttribute("mensagemErro", "Erro: Esta notícia ja existe!");
 			return "redirect:/cadastrarnoticia";
 		}else {
 		String linkEncurtado = EncurtarLink.shortURL(noticia.getLinkImagem());

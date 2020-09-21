@@ -26,8 +26,7 @@
 	<div class="container-fluid">
 		<h1 class="row justify-content-center mt-2">Lista de autores:</h1>
 		<th:block th:include="mensagemValidacao"></th:block>
-		<span th:if="${autor.size() == 0}" class="row justify-content-center alert alert-danger">Nenhuma
-			notícia encontrada.</span>
+		<span th:if="${autor.size() == 0}" class="row justify-content-center alert alert-danger">Nenhum autor encontrado.</span>
 	</div>
 	<table class="container table">
 		<thead>
@@ -54,7 +53,7 @@
                                                   data-placement="top" title="Delete Permanently"></span></a>
                                                   
 				<button type="button" class="btn" data-toggle="modal" title="Deletar" data-target="#modal-delete" th:attr="data-target='#noticiaDeleteConfirmacao'+${autor.id}"><i class="fas fa-trash"></i></button>
-				<a class="btn" title="Editar" th:href="@{'/gerenciamento/editar/' + ${autor.id}}"><i class="fas fa-edit"></i></a>
+				<a class="btn" title="Editar" th:href="@{'/gerenciamento/editarautor/' + ${autor.id}}"><i class="fas fa-edit"></i></a>
 				<div class="modal fade" th:id="noticiaDeleteConfirmacao+${autor.id}" tabindex="-1" role="dialog" aria-labelledby="noticiaDeleteConfirmacao" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                 <div class="modal-content">

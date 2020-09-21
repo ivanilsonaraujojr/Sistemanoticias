@@ -9,4 +9,5 @@ import br.com.ivanilsonjr.model.Autor;
 public interface AutorRepository extends JpaRepository<Autor, Long>{
 	Autor findByCpf(String cpf);
 	List<Autor> findAllByIndVisivelTrue();
+	Autor findByIdAndIndVisivelTrue(Long id);
 }
