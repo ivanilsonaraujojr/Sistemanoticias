@@ -17,17 +17,11 @@ public class EncurtarLink {
         	System.out.println("==> GERANDO LINK DE IMAGEM ENCURTADO <<=");
         	CloseableHttpClient client = HttpClients.createDefault();
         	HttpPost httpPost = new HttpPost("https://api-ssl.bitly.com/v4/shorten");
-            StringBuilder jsonString = new StringBuilder("{");
-            jsonString.append("\"group_guid\":");
-            jsonString.append(" \"Bk9iee5RSSx\",");
-            jsonString.append("\"domain\":");
-            jsonString.append(" \"bit.ly\",");
-            jsonString.append("\"long_url\":");
-            jsonString.append(" \"");
-            jsonString.append(urlToShort);
-            jsonString.append("\"");
-            jsonString.append("}");
-            StringEntity entity = new StringEntity(jsonString.toString());
+        	JSONObject jsonObject = new JSONObject();
+        	jsonObject.put("group_guid", "Bk9iee5RSSx")
+        			  .put("domain", "bit.ly")
+        			  .put("long_url", urlToShort);
+            StringEntity entity = new StringEntity(jsonObject.toString());
             httpPost.setEntity(entity);
             httpPost.setHeader("Accept", "application/json");
             httpPost.setHeader("Content-type", "application/json");
