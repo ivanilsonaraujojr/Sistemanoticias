@@ -27,9 +27,11 @@ import br.com.ivanilsonjr.util.EncurtarLink;
 @Controller
 public class NoticiaController {
 	@Autowired
-	NoticiaRepository nr;
+	private NoticiaRepository nr;
 	@Autowired
-	AutorRepository ar;
+	private AutorRepository ar;
+	@Autowired
+	private EncurtarLink encurtador;
 	
 	
 	@GetMapping(value="/noticia/{codigo}")
@@ -61,8 +63,8 @@ public class NoticiaController {
 			attributes.addFlashAttribute("mensagemErro", "Erro: Esta notícia ja existe!");
 			return "redirect:/cadastrarnoticia";
 		}else {
-		String linkEncurtado = EncurtarLink.shortURL(noticia.getLinkImagem());
-		noticia.setLinkImagem(linkEncurtado.toString());	
+		String linkEncurtado = encurtador.shortURL(noticia.getLinkImagem());
+		noticia.setLinkImagem(linkEncurtado);
 		noticia.setDataPostagem(new Date());
 		nr.save(noticia);
 		attributes.addFlashAttribute("mensagem", "Notícia adicionada com sucesso!");
@@ -113,7 +115,7 @@ public class NoticiaController {
 			return "redirect:/gerenciamento/editarnoticia/" + noticia.getCodigo();
 		}else {
 		if(!noticia.getLinkImagem().equals(nr.findByCodigo(noticia.getCodigo()).getLinkImagem())) {
-			String linkEncurtado = EncurtarLink.shortURL(noticia.getLinkImagem());
+			String linkEncurtado = encurtador.shortURL(noticia.getLinkImagem());
 			noticia.setLinkImagem(linkEncurtado.toString());
 		}
 		noticia.setDataPostagem(new Date());
