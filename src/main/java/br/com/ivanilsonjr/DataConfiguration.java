@@ -1,5 +1,6 @@
 package br.com.ivanilsonjr;
 
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -15,7 +16,11 @@ public class DataConfiguration {
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
         System.out.println("=================================>");
         System.out.println(dbUri.toString());
-        System.out.println(dbUri.toURL());
+        try {
+			System.out.println(dbUri.toURL());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
         System.out.println("<=================================");
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
